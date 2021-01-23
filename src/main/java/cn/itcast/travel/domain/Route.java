@@ -26,14 +26,15 @@ public class Route implements Serializable {
     private List<RouteImg> routeImgList;//商品详情图片列表
 
 
-
     /**
      * 无参构造方法
      */
-    public Route(){}
+    public Route() {
+    }
 
     /**
      * 有参构造方法
+     *
      * @param rid
      * @param rname
      * @param price

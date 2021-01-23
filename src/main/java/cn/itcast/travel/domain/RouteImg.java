@@ -19,6 +19,7 @@ public class RouteImg implements Serializable {
 
     /**
      * 有参构造方法
+     *
      * @param rgid
      * @param rid
      * @param bigPic

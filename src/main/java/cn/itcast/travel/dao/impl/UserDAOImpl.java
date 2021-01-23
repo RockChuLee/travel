@@ -3,7 +3,6 @@ package cn.itcast.travel.dao.impl;
 import cn.itcast.travel.dao.UserDAO;
 import cn.itcast.travel.domain.User;
 import cn.itcast.travel.util.JDBCUtils;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 

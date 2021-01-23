@@ -1,7 +1,6 @@
 package cn.itcast.travel.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * 用于封装后端返回前端数据对象
@@ -14,11 +13,14 @@ public class ResultInfo implements Serializable {
     //无参构造方法
     public ResultInfo() {
     }
+
     public ResultInfo(boolean flag) {
         this.flag = flag;
     }
+
     /**
      * 有参构造方法
+     *
      * @param flag
      * @param errorMsg
      */
@@ -26,8 +28,10 @@ public class ResultInfo implements Serializable {
         this.flag = flag;
         this.errorMsg = errorMsg;
     }
+
     /**
      * 有参构造方法
+     *
      * @param flag
      * @param data
      * @param errorMsg

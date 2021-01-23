@@ -11,6 +11,7 @@ public interface UserDAO {
 
     /**
      * 根据用户名查找用户
+     *
      * @param username
      * @return
      */
@@ -18,6 +19,7 @@ public interface UserDAO {
 
     /**
      * 保存用户
+     *
      * @param user
      */
     void saveUser(User user);

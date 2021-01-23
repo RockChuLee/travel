@@ -13,13 +13,12 @@ public final class MailUtils {
     private static final String PASSWORD = ""; // 如果是qq邮箱可以使户端授权码，或者登录密码
 
     /**
-     *
-     * @param to 收件人邮箱
-     * @param text 邮件正文
+     * @param to    收件人邮箱
+     * @param text  邮件正文
      * @param title 标题
      */
     /* 发送验证信息的邮件 */
-    public static boolean sendMail(String to, String text, String title){
+    public static boolean sendMail(String to, String text, String title) {
         try {
             final Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
@@ -61,17 +60,16 @@ public final class MailUtils {
             // 发送邮件
             Transport.send(message);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
     public static void main(String[] args) throws Exception { // 做测试用
-        MailUtils.sendMail("itcast_xian@163.com","你好，这是一封测试邮件，无需回复。","测试邮件");
+        MailUtils.sendMail("itcast_xian@163.com", "你好，这是一封测试邮件，无需回复。", "测试邮件");
         System.out.println("发送成功");
     }
-
 
 
 }

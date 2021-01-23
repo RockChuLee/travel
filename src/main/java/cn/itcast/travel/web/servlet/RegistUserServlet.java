@@ -34,7 +34,7 @@ public class RegistUserServlet extends HttpServlet {
         session.removeAttribute("CHECKCODE_SERVER");
 
         //不区分大小写的比较
-        if (checkcode_server == null||!checkcode_server.equalsIgnoreCase(check)) {
+        if (checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)) {
             //验证码错误
             ResultInfo result = new ResultInfo();
             result.setFlag(false);

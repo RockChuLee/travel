@@ -14,10 +14,12 @@ public class Seller implements Serializable {
     /**
      * 无参构造方法
      */
-    public Seller(){}
+    public Seller() {
+    }
 
     /**
      * 构造方法
+     *
      * @param sid
      * @param sname
      * @param consphone

@@ -25,6 +25,7 @@ public class User implements Serializable {
 
     /**
      * 有参构方法
+     *
      * @param uid
      * @param username
      * @param password
