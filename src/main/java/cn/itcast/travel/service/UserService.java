@@ -23,4 +23,11 @@ public interface UserService {
      * @return
      */
     boolean active(String code);
+
+    /**
+     *登陆方法
+     * @param user
+     * @return
+     */
+    User login(User user);
 }

@@ -63,4 +63,15 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    /**
+     *登陆方法
+     * @param user
+     * @return
+     */
+    @Override
+    public User login(User user) {
+        User u = userDAO.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        return u;
+    }
 }
