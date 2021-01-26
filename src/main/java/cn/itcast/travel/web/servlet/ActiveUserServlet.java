@@ -29,7 +29,7 @@ public class ActiveUserServlet extends HttpServlet {
             String msg = null;
             if (flag) {
                 //激活成功
-                msg = "激活成功，请<a herf='login.html'>登录</a>";
+                msg = "激活成功，请<a href='login.html'>登录</a>";
             }else {
                 // 激活失败
                 msg = "激活失败，请联系管理员";
@@ -41,6 +41,6 @@ public class ActiveUserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.doPost(request, response);
     }
 }
