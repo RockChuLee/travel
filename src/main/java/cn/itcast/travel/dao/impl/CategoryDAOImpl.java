@@ -19,7 +19,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public List<Category> findAll() {
-        String sql = "SELECT * FROM tab_category";
+        String sql = "SELECT * FROM tab_category ORDER BY cid";
         return template.query(sql, new BeanPropertyRowMapper<Category>(Category.class));
     }
 }
