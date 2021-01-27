@@ -167,7 +167,7 @@
                     && checkTelephone() && checkBirthday() && checkCode()) {
                     //校验通过,发送ajax请求，提交表单的数据   username=zhangsan&password=123
 
-                    $.post("registUserServlet", $(this).serialize(), function (data) {
+                    $.post("user/regist", $(this).serialize(), function (data) {
                         //$(this).serialize() JQuery的方法，序列化表单内容为字符串（key-value的形式）
                         //$(this)是将this转化为JQuery对象，因为this是JS语法，这里的this指代调用这个方法的表单registerForm
                         //处理服务器响应的数据  data  {flag:true,errorMsg:"注册失败"}

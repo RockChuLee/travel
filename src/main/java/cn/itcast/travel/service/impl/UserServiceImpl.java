@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
         //3. 激活邮件发送
         //如果是发布的项目就不能使用localhost，而是项目的域名
-        String content = "<a href='http://localhost/travel/activeUserServlet?code=" + user.getCode() + "'>激活【黑马旅游网】</a>";
+        String content = "<a href='http://localhost/travel/user/active?code=" + user.getCode() + "'>激活【黑马旅游网】</a>";
         MailUtils.sendMail(user.getEmail(), content, "激活邮件");
         return true;
     }
