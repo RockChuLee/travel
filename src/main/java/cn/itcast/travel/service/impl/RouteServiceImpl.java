@@ -6,6 +6,7 @@ import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
 import cn.itcast.travel.service.RouteService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,6 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize) {
-
         //封装PageBean
         PageBean<Route> pageBean = new PageBean<>();
         //设置当前页码
@@ -31,7 +31,8 @@ public class RouteServiceImpl implements RouteService {
         pageBean.setTotalCount(totalCount);
         //设置当前页现实的数据集合
         int start = (currentPage - 1) * pageSize;
-        List<Route> routes = routeDAO.findByPage(cid, start, pageSize);
+        List<Route> routes = new ArrayList<>();
+        routes = routeDAO.findByPage(cid, start, pageSize);
         pageBean.setList(routes);
         //设置总页数
         int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : (totalCount / pageSize) + 1;
