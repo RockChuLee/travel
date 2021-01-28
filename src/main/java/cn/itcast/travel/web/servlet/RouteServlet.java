@@ -35,7 +35,7 @@ public class RouteServlet extends BaseServlet {
 
         int cid = 0;
         //2. 处理参数
-        if (cidStr != null && cidStr.length() > 0) {
+        if (cidStr != null && cidStr.length() > 0 && !"null".equals(cidStr)) {
             cid = Integer.parseInt(cidStr);
         }
         int currentPage = 1;//当前页码，默认第一页

@@ -28,12 +28,12 @@
             }
 
             //当页面加载完成后，调用load方法，发送ajax请求加载数据
-            load(cid);
+            load(cid, null, rname);
         });
 
-        function load(cid, currentPage) {
+        function load(cid, currentPage, rname) {
             //发送ajax请求，请求route/pageQuery，传递cid
-            $.get("route/pageQuery", {cid: cid, currentPage: currentPage}, function (pb) {
+            $.get("route/pageQuery", {cid: cid, currentPage: currentPage, rname: rname}, function (pb) {
                 //解析pagebean数据，展示到页面上
                 //1.分页工具条数据展示
                 //1.1 展示总页码和总记录数
@@ -56,13 +56,13 @@
                 // <li class="threeword"><a href="javascript:;">末页</a></li>
                 var lis = "";
                 //首页
-                lis += '<li onclick="javascript:load(' + cid + ',' + 1 + ')"><a href="javascript:void()">首页</a></li>';
+                lis += '<li onclick="javascript:load(' + cid + ',' + 1 + ',\'' + rname + '\')"><a href="javascript:void()">首页</a></li>';
                 //上一页
                 var beforeNum = pb.currentPage - 1
                 if (beforeNum < 1) {
                     beforeNum = 1;
                 }
-                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + beforeNum + ')"><a href="javascript:void()">上一页</a></li>';
+                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + beforeNum + ',\'' + rname + '\')"><a href="javascript:void()">上一页</a></li>';
 
                 // 1.一共展示10个页码，能够达到前5后4的效果
                 // 2.如果前边不够5个，后边补齐10个
@@ -94,7 +94,7 @@
                         var li = '<li class="curPage"><a href="javascript:void()">' + i + '</a></li>'
                     } else {
                         //创建一个页码的li
-                        var li = '<li onclick="javascript:load(' + cid + ',' + i + ')"><a href="javascript:void()">' + i + '</a></li>';
+                        var li = '<li onclick="javascript:load(' + cid + ',' + i + ',\'' + rname + '\')"><a href="javascript:void()">' + i + '</a></li>';
                     }
                     //拼接
                     lis += li;
@@ -104,8 +104,8 @@
                 if (afterNum > pb.totalPage) {
                     afterNum = pb.totalPage
                 }
-                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + afterNum + ')"><a href="javascript:void()">下一页</a></li>';
-                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + pb.totalPage + ')"><a href="javascript:void()">末页</a></li>';
+                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + afterNum + ',\'' + rname + '\')"><a href="javascript:void()">下一页</a></li>';
+                lis += '<li class="threeword" onclick="javascript:load(' + cid + ',' + pb.totalPage + ',\'' + rname + '\')"><a href="javascript:void()">末页</a></li>';
                 //将lis设置到ul中
                 $("#pageNum").html(lis);
 
