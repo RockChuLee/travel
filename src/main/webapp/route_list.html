@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script src="js/getParameter.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +14,18 @@
 
     <script>
         $(function () {
-            var search = location.search;
-            // alert(search);//?id=5
-            //切割字符串，拿到第二个值
-            var cid = search.split("=")[1];
+            // var search = location.search;
+            // // alert(search);//?id=5
+            // //切割字符串，拿到第二个值
+            // var cid = search.split("=")[1];
+
+            var cid = getParameter("cid");
+            var rname = getParameter("rname");
+            //如果rname如果不为空或者”“
+            if (rname) {
+                //解码
+                rname = window.decodeURIComponent(rname);
+            }
 
             //当页面加载完成后，调用load方法，发送ajax请求加载数据
             load(cid);
