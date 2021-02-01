@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<script src="js/getParameter.js"></script>
+
 <head>
     <meta charset="utf-8">
     <title>路线详情</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/route-detail.css">
+    <script src="js/jquery-3.3.1.js"></script>
+
+    <script>
+        $(function () {
+            var rid = getParameter("rid");
+            alert(rid);
+        });
+    </script>
 </head>
 
 <body>
