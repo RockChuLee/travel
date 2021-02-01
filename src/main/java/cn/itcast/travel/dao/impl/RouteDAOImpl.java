@@ -2,6 +2,7 @@ package cn.itcast.travel.dao.impl;
 
 import cn.itcast.travel.dao.RouteDAO;
 import cn.itcast.travel.domain.Route;
+import cn.itcast.travel.domain.User;
 import cn.itcast.travel.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -66,5 +67,12 @@ public class RouteDAOImpl implements RouteDAO {
         sql = sb.toString();
 
         return template.query(sql, new BeanPropertyRowMapper<Route>(Route.class), params.toArray());
+    }
+
+    @Override
+    public Route findOne(int rid) {
+
+        String sql = "SELECT * FROM tab_route WHERE rid = ? ";
+        return template.queryForObject(sql, new BeanPropertyRowMapper<Route>(Route.class), rid);
     }
 }

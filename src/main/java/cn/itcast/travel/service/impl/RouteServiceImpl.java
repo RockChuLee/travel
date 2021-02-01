@@ -1,9 +1,15 @@
 package cn.itcast.travel.service.impl;
 
 import cn.itcast.travel.dao.RouteDAO;
+import cn.itcast.travel.dao.RouteImgDAO;
+import cn.itcast.travel.dao.SellerDao;
 import cn.itcast.travel.dao.impl.RouteDAOImpl;
+import cn.itcast.travel.dao.impl.RouteImgDAOImpl;
+import cn.itcast.travel.dao.impl.SellerDAOImpl;
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
+import cn.itcast.travel.domain.RouteImg;
+import cn.itcast.travel.domain.Seller;
 import cn.itcast.travel.service.RouteService;
 
 import java.util.ArrayList;
@@ -17,6 +23,8 @@ import java.util.List;
 public class RouteServiceImpl implements RouteService {
 
     RouteDAO routeDAO = new RouteDAOImpl();
+    RouteImgDAO routeImgDAO = new RouteImgDAOImpl();
+    SellerDao sellerDao = new SellerDAOImpl();
 
     @Override
     public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize,String rname) {
@@ -38,5 +46,21 @@ public class RouteServiceImpl implements RouteService {
         int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : (totalCount / pageSize) + 1;
         pageBean.setTotalPage(totalPage);
         return pageBean;
+    }
+
+    @Override
+    public Route findOne(int rid) {
+        //1.根据id去route里面查询route信息
+        Route route = routeDAO.findOne(rid);
+
+        //2. 根据route的id查询图片集合信息
+        List<RouteImg> imgs = routeImgDAO.findByRid(rid);
+        route.setRouteImgList(imgs);
+
+        //3. 根据route的sid查询卖家信息
+        Seller seller = sellerDao.findSellerBySid(route.getSid());
+        route.setSeller(seller);
+
+        return route;
     }
 }

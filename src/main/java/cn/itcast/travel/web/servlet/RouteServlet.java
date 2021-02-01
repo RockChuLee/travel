@@ -54,4 +54,19 @@ public class RouteServlet extends BaseServlet {
         writeValue(pageBean, response);
     }
 
+    public void findOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1. 获取参数
+        String ridStr = request.getParameter("rid");
+        //1.1 处理数据
+        int rid = 0;
+        if (ridStr != null && ridStr.length() > 0 && !"null".equals(ridStr)) {
+            rid = Integer.parseInt(ridStr);
+        }
+
+        //调用service方法
+        Route route = routeService.findOne(rid);
+
+        //3.转为json写回客户端
+        writeValue(route, response);
+    }
 }
