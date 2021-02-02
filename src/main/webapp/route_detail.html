@@ -84,9 +84,10 @@
             <div class="pros_price">
                 <p class="price"><strong id="price">¥2699.00</strong><span>起</span></p>
                 <p class="collect">
-                    <a class="btn" id="favorite"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
+                    <a class="btn" id="favorite" onclick="addFavorite();"><i
+                            class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
                     <!--                    <a class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>-->
-                    <span>已收藏100次</span>
+                    <span id="favoriteCount">已收藏100次</span>
                 </p>
             </div>
         </div>
@@ -206,6 +207,7 @@
             $("#sname").html(route.seller.sname);
             $("#consphone").html(route.seller.consphone);
             $("#address").html(route.seller.address);
+            $("#favoriteCount").html("已收藏" + route.count + "次");
 
 
             /*
@@ -296,12 +298,33 @@
                 //用户已经收藏
                 //设置样式
                 $("#favorite").addClass("already");
-                $("#favorite").prop("disabled",disabled);
+                $("#favorite").attr("disabled", "disabled");
+
+                //删除按钮的点击事件
+                $("#favorite").removeAttr("onclick");
             } else {
                 //用户还没有收藏
             }
         })
-    })
+    });
+
+    function addFavorite() {
+        var rid = getParameter("rid");
+        //1. 判断用户是否登录
+        $.get("user/findOne", {}, function (user) {
+            if (user) {
+                //用户登录了
+                //添加
+                $.get("route/addFavorite", {rid:rid}, function (user) {
+
+                });
+            }else {
+                //没有登陆
+                alert("您尚未登录，请登录")
+                location.href = "http://localhost/travel/login.html";
+            }
+        });
+    }
 
 
 </script>

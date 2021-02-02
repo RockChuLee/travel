@@ -8,4 +8,6 @@ package cn.itcast.travel.service;
 public interface FavoriteService {
 
     Boolean isFavorite(int rid, int uid);
+
+    void addFavorite(int rid, int uid);
 }

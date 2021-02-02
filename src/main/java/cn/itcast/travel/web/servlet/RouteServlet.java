@@ -95,4 +95,25 @@ public class RouteServlet extends BaseServlet {
         //3.转为json写回客户端
         writeValue(flag, response);
     }
+
+    public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1. 获取参数
+        String ridStr = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        //1.1 处理数据
+        int rid = 0;
+        if (ridStr != null && ridStr.length() > 0 && !"null".equals(ridStr)) {
+            rid = Integer.parseInt(ridStr);
+        }
+        int uid;
+        if (user != null) {
+            //用户已经登录
+            uid = user.getUid();
+        }else {
+            return;
+        }
+
+        favoriteService.addFavorite(rid, uid);
+    }
+
 }

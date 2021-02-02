@@ -7,6 +7,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Date;
+
 /**
  * @Description:
  * @Author: dh
@@ -26,5 +28,19 @@ public class FavoriteDAOImpl implements FavoriteDAO {
             e.printStackTrace();
         }
         return favorite;
+    }
+
+    @Override
+    public int findCountByRid(int rid) {
+        String sql = "SELECT count(*) FROM tab_favorite WHERE rid = ?";
+        return template.queryForObject(sql, Integer.class, rid);
+    }
+
+    @Override
+    public void addForvarite(int rid, int uid) {
+        // 1. 定义sql
+        String sql = "INSERT INTO tab_favorite(rid, date, uid) VALUES (?,?,?) ";
+        // 2. 执行sql
+        template.update(sql, rid, new Date(), uid);
     }
 }

@@ -1,15 +1,14 @@
 package cn.itcast.travel.service.impl;
 
+import cn.itcast.travel.dao.FavoriteDAO;
 import cn.itcast.travel.dao.RouteDAO;
 import cn.itcast.travel.dao.RouteImgDAO;
 import cn.itcast.travel.dao.SellerDao;
+import cn.itcast.travel.dao.impl.FavoriteDAOImpl;
 import cn.itcast.travel.dao.impl.RouteDAOImpl;
 import cn.itcast.travel.dao.impl.RouteImgDAOImpl;
 import cn.itcast.travel.dao.impl.SellerDAOImpl;
-import cn.itcast.travel.domain.PageBean;
-import cn.itcast.travel.domain.Route;
-import cn.itcast.travel.domain.RouteImg;
-import cn.itcast.travel.domain.Seller;
+import cn.itcast.travel.domain.*;
 import cn.itcast.travel.service.RouteService;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class RouteServiceImpl implements RouteService {
     RouteDAO routeDAO = new RouteDAOImpl();
     RouteImgDAO routeImgDAO = new RouteImgDAOImpl();
     SellerDao sellerDao = new SellerDAOImpl();
+    FavoriteDAO favoriteDAO = new FavoriteDAOImpl();
 
     @Override
     public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize,String rname) {
@@ -60,6 +60,10 @@ public class RouteServiceImpl implements RouteService {
         //3. 根据route的sid查询卖家信息
         Seller seller = sellerDao.findSellerBySid(route.getSid());
         route.setSeller(seller);
+
+        //4. 根据rid查询收藏次数
+        int count = favoriteDAO.findCountByRid(rid);
+        route.setCount(count);
 
         return route;
     }
