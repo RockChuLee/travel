@@ -84,9 +84,8 @@
             <div class="pros_price">
                 <p class="price"><strong id="price">¥2699.00</strong><span>起</span></p>
                 <p class="collect">
-                    <a class="btn"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
-
-                    <a class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
+                    <a class="btn" id="favorite"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
+                    <!--                    <a class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>-->
                     <span>已收藏100次</span>
                 </p>
             </div>
@@ -289,6 +288,20 @@
             goImg();
         });
     });
+
+    $(function () {
+        var rid = getParameter("rid");
+        $.get("route/isFavorite", {rid: rid}, function (flag) {
+            if (flag) {
+                //用户已经收藏
+                //设置样式
+                $("#favorite").addClass("already");
+                $("#favorite").prop("disabled",disabled);
+            } else {
+                //用户还没有收藏
+            }
+        })
+    })
 
 
 </script>

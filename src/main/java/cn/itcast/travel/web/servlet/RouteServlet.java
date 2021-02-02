@@ -2,7 +2,10 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
+import cn.itcast.travel.domain.User;
+import cn.itcast.travel.service.FavoriteService;
 import cn.itcast.travel.service.RouteService;
+import cn.itcast.travel.service.impl.FavoriteServiceImpl;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
 
 import javax.servlet.ServletException;
@@ -20,6 +23,7 @@ import java.io.IOException;
 public class RouteServlet extends BaseServlet {
 
     RouteService routeService = new RouteServiceImpl();
+    FavoriteService favoriteService = new FavoriteServiceImpl();
 
     public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1. 接收参数
@@ -68,5 +72,27 @@ public class RouteServlet extends BaseServlet {
 
         //3.转为json写回客户端
         writeValue(route, response);
+    }
+
+    public void isFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1. 获取参数
+        String ridStr = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        //1.1 处理数据
+        int rid = 0;
+        if (ridStr != null && ridStr.length() > 0 && !"null".equals(ridStr)) {
+            rid = Integer.parseInt(ridStr);
+        }
+        int uid = 0;
+        if (user != null) {
+            //用户已经登录
+            uid = user.getUid();
+        }
+
+        //2. 调用service
+        Boolean flag = favoriteService.isFavorite(rid, uid);
+
+        //3.转为json写回客户端
+        writeValue(flag, response);
     }
 }
